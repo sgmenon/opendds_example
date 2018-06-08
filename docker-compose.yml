@@ -1,0 +1,12 @@
+version: '2'
+services:
+  subscriber:
+    image: opendds_example_img
+    command: ["./build_glnxa64/bin/StockQuoter_Subscriber", "-DCPSConfigFile",  "/opt/OpenDDS_Example/config/rtps.ini" ]
+    volumes:
+      - $PWD:/opt/OpenDDS_Example
+  publisher:
+    image: opendds_example_img
+    command: ["./build_glnxa64/bin/StockQuoter_Publisher", "-DCPSConfigFile",  "/opt/OpenDDS_Example/config/rtps.ini" ]
+    volumes:
+      - $PWD:/opt/OpenDDS_Example

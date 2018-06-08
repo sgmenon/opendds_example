@@ -1,0 +1,17 @@
+version: '2'
+services:
+  DCPSServer:
+    image: opendds_example_img
+    command: "DCPSInfoRepo -NOBITS -ORBListenEndpoints iiop://localhost:12345"
+    volumes:
+      - $PWD:/opt/OpenDDS_Example
+  subscriber:
+    image: opendds_example_img
+    command: ["./wait-for-it.sh", "localhost:12345", "--", "./build_glnxa64/bin/StockQuoter_Subscriber", "-DCPSConfigFile",  "/opt/OpenDDS_Example/config/dds_tcp_conf.ini" ]
+    volumes:
+      - $PWD:/opt/OpenDDS_Example
+  publisher:
+    image: opendds_example_img
+    command: ["./wait-for-it.sh", "localhost:12345", "--", "./build_glnxa64/bin/StockQuoter_Publisher", "-DCPSConfigFile",  "/opt/OpenDDS_Example/config/dds_tcp_conf.ini" ]
+    volumes:
+      - $PWD:/opt/OpenDDS_Example

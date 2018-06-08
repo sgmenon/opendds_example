@@ -1,0 +1,4 @@
+add_subdirectory(idl_generated)
+add_subdirectory(mw_adapter)
+add_subdirectory(publisher)
+add_subdirectory(subscriber)
